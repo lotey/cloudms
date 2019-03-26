@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zttd.member.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.zttd.member.model.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="sex" jdbcType="CHAR" property="sex" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+    <result column="weixin" jdbcType="VARCHAR" property="weixin" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="is_online" jdbcType="CHAR" property="isOnline" />
+    <result column="type" jdbcType="CHAR" property="type" />
+    <result column="handicap" jdbcType="CHAR" property="handicap" />
+    <result column="parent_user_id" jdbcType="INTEGER" property="parentUserId" />
+    <result column="headImg" jdbcType="VARCHAR" property="headimg" />
+    <result column="advertisement" jdbcType="VARCHAR" property="advertisement" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="short_url" jdbcType="VARCHAR" property="shortUrl" />
+    <result column="refer_url" jdbcType="VARCHAR" property="referUrl" />
+    <result column="wechat_type" jdbcType="CHAR" property="wechatType" />
+    <result column="is_enable_robot" jdbcType="CHAR" property="isEnableRobot" />
+    <result column="robot_user_count" jdbcType="INTEGER" property="robotUserCount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_name, salt, nick_name, sex, qq, weixin, status, is_online, type, handicap,
+    parent_user_id, headImg, advertisement, openid, remarks, short_url, refer_url, wechat_type,
+    is_enable_robot, robot_user_count, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insertSelective" parameterType="com.zttd.member.model.User">
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="salt != null">
+        salt,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="qq != null">
+        qq,
+      </if>
+      <if test="weixin != null">
+        weixin,
+      </if>
+      <if test="advertisement != null">
+        advertisement,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="isOnline != null">
+        is_online,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="handicap != null">
+        handicap,
+      </if>
+      <if test="parentUserId != null">
+        parent_user_id,
+      </if>
+      <if test="headimg != null">
+        headImg,
+      </if>
+      <if test="openid != null">
+        openid,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="shortUrl != null">
+        short_url,
+      </if>
+      <if test="referUrl != null">
+        refer_url,
+      </if>
+      <if test="wechatType != null">
+        wechat_type,
+      </if>
+      <if test="isEnableRobot != null">
+        is_enable_robot,
+      </if>
+      <if test="robotUserCount != null">
+        robot_user_count,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="weixin != null">
+        #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="advertisement != null">
+        #{advertisement,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="isOnline != null">
+        #{isOnline,jdbcType=CHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="handicap != null">
+        #{handicap,jdbcType=CHAR},
+      </if>
+      <if test="parentUserId != null">
+        #{parentUserId,jdbcType=INTEGER},
+      </if>
+      <if test="headimg != null">
+        #{headimg,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="shortUrl != null">
+        #{shortUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="referUrl != null">
+        #{referUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatType != null">
+        #{wechatType,jdbcType=CHAR},
+      </if>
+      <if test="isEnableRobot != null">
+        #{isEnableRobot,jdbcType=CHAR},
+      </if>
+      <if test="robotUserCount != null">
+        #{robotUserCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime},
+      </if>
+    </trim>
+    <selectKey resultType="java.lang.Integer" keyProperty="id">
+      SELECT LAST_INSERT_ID() AS id
+    </selectKey>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zttd.member.model.User">
+    update t_user
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="qq != null">
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="weixin != null">
+        weixin = #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="advertisement != null">
+        advertisement = #{advertisement,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="isOnline != null">
+        is_online = #{isOnline,jdbcType=CHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="handicap != null">
+        handicap = #{handicap,jdbcType=CHAR},
+      </if>
+      <if test="parentUserId != null">
+        parent_user_id = #{parentUserId,jdbcType=INTEGER},
+      </if>
+      <if test="headimg != null">
+        headImg = #{headimg,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null">
+        openid = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="shortUrl != null">
+        short_url = #{shortUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="referUrl != null">
+        refer_url = #{referUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatType != null">
+        wechat_type = #{wechatType,jdbcType=CHAR},
+      </if>
+      <if test="isEnableRobot != null">
+        is_enable_robot = #{isEnableRobot,jdbcType=CHAR},
+      </if>
+      <if test="robotUserCount != null">
+        robot_user_count = #{robotUserCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 获取用户信息 -->
+  <select id="getUserInfoById" parameterType="int" resultType="map">
+  	SELECT 
+	u.id,u.user_name,u.nick_name,u.salt,u.status,u.is_online,u.type,u.handicap,u.wechat_type,u.parent_user_id,u.headImg,u.create_time,u.update_time,u.sex,u.openid,u.remarks,u.qq,u.weixin,u.advertisement,
+	a.id as accountId,a.account_no,a.real_amount,a.create_time,a.update_time,
+    (SELECT GROUP_CONCAT(nick_name) FROM t_robot_user WHERE admin_user_id = u.id) as robotNickNames
+	FROM t_user u LEFT JOIN t_account a ON u.id=a.user_id WHERE u.parent_user_id='0' AND u.id=#{userId}
+  </select>
+
+  <!-- 获取用户信息及上级信息 -->
+  <select id="getUserInfoWithParentById" parameterType="int" resultType="map">
+    SELECT
+    u.id,u.nick_name,u.status,u.is_online,u.type,u.handicap,u.parent_user_id,u.headImg,u.create_time,u.update_time,u.sex,u.remarks,parent.qq,parent.weixin,parent.advertisement,
+    a.id as accountId,a.account_no,a.real_amount
+    FROM t_user u
+    LEFT JOIN t_user parent ON u.parent_user_id = parent.id
+    LEFT JOIN t_account a ON u.id=a.user_id
+    WHERE u.id=#{userId}
+  </select>
+  
+  <!-- 查询用户列表 -->
+  <select id="getUserList" parameterType="map" resultType="map">
+    SELECT
+    u.id,u.user_name,u.nick_name,u.status,u.is_online,u.type,u.handicap,u.parent_user_id,u.create_time,u.update_time,u.remarks,
+    a.id as accountId,a.account_no,a.user_id,a.real_amount,a.create_time,a.update_time,parent.wechat_type FROM t_user u
+    LEFT JOIN t_account a ON u.id=a.user_id
+    LEFT JOIN t_user parent ON u.parent_user_id=parent.id
+    WHERE u.type='1'
+  	<if test="parentUserId != null and parentUserId != ''">
+  		AND u.parent_user_id = #{parentUserId}
+  	</if>
+  	<if test="nickName != null and nickName != ''">
+  		AND u.nick_name LIKE CONCAT('%',#{nickName},'%')
+  	</if>
+  	<if test="accountNo != null and accountNo != ''">
+	  	 AND a.account_no=#{accountNo}
+  	</if>
+  	ORDER BY u.create_time DESC
+    <if test="pageSize != null and pageSize != ''">
+      LIMIT #{pageNow},#{pageSize}
+    </if>
+  </select>
+
+  <!-- 查询用户列表 -->
+  <select id="getUserListCount" parameterType="map" resultType="int">
+    SELECT COUNT(1) as cnt FROM t_user u
+    LEFT JOIN t_account a ON u.id=a.user_id
+    LEFT JOIN t_user parent ON u.parent_user_id=parent.id
+    WHERE u.type='1'
+    <if test="parentUserId != null and parentUserId != ''">
+      AND u.parent_user_id = #{parentUserId}
+    </if>
+    <if test="nickName != null and nickName != ''">
+      AND u.nick_name LIKE CONCAT('%',#{nickName},'%')
+    </if>
+    <if test="accountNo != null and accountNo != ''">
+      AND a.account_no=#{accountNo}
+    </if>
+  </select>
+
+  <!--根据openId获取用户信息-->
+  <select id="selectByOpenId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_user
+    where openid = #{openId,jdbcType=VARCHAR}
+  </select>
+
+  <!--根据用户ID查询管理员信息-->
+  <select id="selectAdminUserByUserId" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM t_user u1 WHERE EXISTS (SELECT 1 FROM t_user u2 WHERE u2.parent_user_id=u1.id AND u2.id=#{userId,jdbcType=INTEGER})
+  </select>
+
+  <!--查询用户信息-->
+  <select id="selectUserByParam" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM t_user WHERE 1=1
+    <if test="type != null and type !=''">
+      AND type = #{type}
+    </if>
+    <if test="userIds != null and userIds !=''">
+      AND id IN (${userIds})
+    </if>
+  </select>
+
+  <!--根据用户名查询用户信息-->
+  <select id="selectByUserName" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM t_user WHERE type='0' AND user_name = #{userName}
+  </select>
+
+  <!--查询全部在线的代理列表-->
+  <select id="getAllOnlineAgentUserList" resultType="map" parameterType="map">
+    SELECT u.user_name,a.id FROM t_user u LEFT JOIN t_account a ON u.id = a.user_id WHERE u.type='0'
+    <if test="userIds != null and userIds !=''">
+      AND u.id IN(${userIds})
+    </if>
+  </select>
+
+  <!--查询最后插入的同名的用户-->
+  <select id="findLastInsertSameNameUser" parameterType="map" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM t_user WHERE type='1'
+    <if test="parentUserId != null and parentUserId != ''">
+      AND parent_user_id=#{parentUserId}
+    </if>
+    <if test="nickname != null and nickname != ''">
+      AND nick_name like CONCAT(#{nickname},'%')
+    </if>
+    ORDER BY create_time DESC LIMIT 1
+  </select>
+
+  <!--根据短连接查询用户-->
+  <select id="selectByShortUrl" parameterType="string" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_user
+    where parent_user_id = '0' AND short_url = #{shortUrl,jdbcType=VARCHAR}
+  </select>
+
+  <!--查询会员列表-->
+  <select id="getMemberList" parameterType="map" resultType="map">
+    SELECT
+    u.id,u.nick_name,u.create_time,u.update_time,parent.user_name,u.status,u.handicap,u.remarks,parent.short_url,parent.wechat_type,a.id as accountId,a.account_no,a.real_amount
+    FROM t_user u
+    LEFT JOIN t_account a ON u.id = a.user_id
+    LEFT JOIN t_user parent ON u.parent_user_id = parent.id AND parent.type='0'
+    WHERE u.type='1'
+    <if test="nickName != null and nickName != ''">
+      AND parent.user_name like CONCAT('%',#{nickName},'%')
+    </if>
+    <if test="referUrl != null and referUrl != ''">
+      AND parent.refer_url like CONCAT('%',#{referUrl},'%')
+    </if>
+    <if test="accountNo != null and accountNo != ''">
+      AND a.account_no=#{accountNo}
+    </if>
+    <if test="wechatType != null and wechatType != ''">
+      AND parent.wechat_type=#{wechatType}
+    </if>
+    ORDER BY u.create_time DESC
+    <if test="pageSize != null and pageSize != ''">
+      LIMIT #{pageNow},#{pageSize}
+    </if>
+  </select>
+
+  <!--查询会员列表总条数-->
+  <select id="getMemberListCount" parameterType="map" resultType="int">
+    SELECT COUNT(1) FROM t_user u
+    LEFT JOIN t_account a ON u.id = a.user_id
+    LEFT JOIN t_user parent ON u.parent_user_id = parent.id AND parent.type='0'
+    WHERE u.type='1'
+    <if test="nickName != null and nickName != ''">
+      AND parent.user_name like CONCAT('%',#{nickName},'%')
+    </if>
+    <if test="referUrl != null and referUrl != ''">
+      AND parent.refer_url like CONCAT('%',#{referUrl},'%')
+    </if>
+    <if test="accountNo != null and accountNo != ''">
+      AND a.account_no=#{accountNo}
+    </if>
+    <if test="wechatType != null and wechatType != ''">
+      AND parent.wechat_type=#{wechatType}
+    </if>
+  </select>
+
+  <!--查询代理用户列表-->
+  <select id="getAgentUserList" parameterType="map" resultType="map">
+    SELECT
+    u.id,u.user_name,u.salt,u.nick_name,u.sex,u.qq,u.weixin,u.status,u.is_online,u.type,u.handicap,u.parent_user_id,u.headImg,u.advertisement,
+    u.openid,u.remarks,u.short_url,u.refer_url,u.wechat_type,u.is_enable_robot,u.robot_user_count,u.create_time,u.update_time,
+    a.id as accountId,a.account_no,a.user_id,a.real_amount,a.create_time,a.update_time
+    FROM t_user u LEFT JOIN t_account a ON u.id=a.user_id WHERE u.type='0'
+    <if test="nickName != null and nickName != ''">
+      AND u.user_name LIKE CONCAT('%',#{nickName},'%')
+    </if>
+    <if test="accountNo != null and accountNo != ''">
+      AND a.account_no=#{accountNo}
+    </if>
+    <if test="referUrl != null and referUrl != ''">
+      AND u.refer_url LIKE CONCAT('%',#{referUrl},'%')
+    </if>
+    <if test="wechatType != null and wechatType != ''">
+      AND u.wechat_type=#{wechatType}
+    </if>
+    ORDER BY u.create_time DESC
+    <if test="pageSize != null and pageSize != ''">
+      LIMIT #{pageNow},#{pageSize}
+    </if>
+  </select>
+
+  <!--查询代理用户列表总条数-->
+  <select id="getAgentUserListCount" parameterType="map" resultType="int">
+    SELECT COUNT(1) as cnt
+    FROM t_user u LEFT JOIN t_account a ON u.id=a.user_id WHERE u.type='0'
+    <if test="nickName != null and nickName != ''">
+      AND u.user_name LIKE CONCAT('%',#{nickName},'%')
+    </if>
+    <if test="accountNo != null and accountNo != ''">
+      AND a.account_no=#{accountNo}
+    </if>
+    <if test="referUrl != null and referUrl != ''">
+      AND u.refer_url LIKE CONCAT('%',#{referUrl},'%')
+    </if>
+    <if test="wechatType != null and wechatType != ''">
+      AND u.wechat_type=#{wechatType}
+    </if>
+  </select>
+
+  <!--查询全部的代理（设置机器人的）用户列表-->
+  <select id="getTotalAgentWithRobotList" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM t_user u WHERE EXISTS (SELECT 1 FROM t_robot_user WHERE admin_user_id = u.id)
+    <if test="type != null and type !=''">
+      AND u.type = #{type}
+    </if>
+    <if test="isEnableRobot != null and isEnableRobot != ''">
+      AND u.is_enable_robot = #{isEnableRobot}
+    </if>
+    <if test="userIds != null and userIds !=''">
+      AND u.id IN (${userIds})
+    </if>
+  </select>
+
+  <!--统计代理用户总金额-->
+  <select id="statisticAgentSumAmt" parameterType="map" resultType="java.math.BigDecimal">
+    SELECT SUM(a.real_amount) FROM t_user u LEFT JOIN t_account a ON u.id = a.user_id WHERE u.type='1' AND u.parent_user_id=#{parentUserId}
+  </select>
+
+  <!--统计所有代理总金额-->
+  <select id="statisticSumAmt" parameterType="map" resultType="map">
+    SELECT parent.nick_name,SUM(a.real_amount) as totalAmt FROM t_user u
+    LEFT JOIN t_account a ON u.id = a.user_id
+    LEFT JOIN t_user parent ON u.parent_user_id = parent.id AND parent.type='0'
+    WHERE u.type='1' GROUP BY u.parent_user_id
+    UNION ALL
+    SELECT 'total',SUM(a.real_amount) as totalAmt FROM t_user u LEFT JOIN t_account a ON u.id = a.user_id WHERE u.type='1'
+  </select>
+
+</mapper>

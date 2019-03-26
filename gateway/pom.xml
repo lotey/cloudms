@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.zttd</groupId>
+        <artifactId>cloudms</artifactId>
+        <version>0.0.1</version>
+    </parent>
+    <artifactId>gateway</artifactId>
+    <version>0.0.1</version>
+    <name>gateway</name>
+    <description>Demo project for Spring Boot</description>
+
+    <!--<dependencies>-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.cloud</groupId>-->
+            <!--<artifactId>spring-cloud-starter-gateway</artifactId>-->
+        <!--</dependency>-->
+    <!--</dependencies>-->
+
+    <build>
+        <finalName>gateway</finalName>
+        <plugins>
+            <!--docker打镜像插件-->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.2.0</version>
+                <configuration>
+                    <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+                    <imageName>${docker.repository}/${project.artifactId}</imageName>
+                    <imageTags>
+                        <imageTag>${project.version}</imageTag>
+                        <imageTag>latest</imageTag>
+                    </imageTags>
+                    <!--配置镜像推送位置-->
+                    <dockerHost>${docker.host}</dockerHost>
+                    <!--&lt;!&ndash;配置推送到nexus私服仓库&ndash;&gt;-->
+                    <!--<serverId>docker-nexus</serverId>-->
+                    <!--<pushImage>true</pushImage>-->
+                    <!--<forceTags>true</forceTags>-->
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

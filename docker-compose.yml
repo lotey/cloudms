@@ -1,0 +1,57 @@
+version: '2'
+
+services:
+  zk:
+    # 依赖于zookeeper镜像，本地无则自动下载
+    image: zookeeper:3.4.13
+    restart: always
+    hostname: zk
+    # 映射端口
+    ports:
+      - "2181:2181"
+    # 容器名称
+    container_name: zk
+  kafka1:
+    # 依赖于wurstmeister/kafka镜像
+    image: wurstmeister/kafka:2.11-1.1.1
+    # 映射端口
+    ports:
+      - "9092:9092"
+    # 目录挂载 【容器目录:宿主机目录】
+    volumes:
+      - /var/log/kafka/logs:/data/docker-vp/kafka1/logs
+    # 配置环境变量
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.0.118
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_ZOOKEEPER_CONNECT: "zk:2181"
+      KAFKA_BROKER_ID: 1
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_CREATE_TOPICS: "stream-in:1:1,stream-out:1:1"
+    # 解决服务启动顺序问题，例如下面容器会先确定zoo1和redis两个服务，最后才启动kafka1服务
+    depends_on:
+      - zk
+    # 容器名称
+    container_name: kafka1
+  kafka2:
+    # 依赖于wurstmeister/kafka镜像
+    image: wurstmeister/kafka:2.11-1.1.1
+    # 映射端口
+    ports:
+      - "9093:9092"
+    # 目录挂载 【容器目录:宿主机目录】
+    volumes:
+      - /var/log/kafka/logs:/data/docker-vp/kafka2/logs
+    # 配置环境变量
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.0.118
+      KAFKA_ADVERTISED_PORT: 9093
+      KAFKA_ZOOKEEPER_CONNECT: "zk:2181"
+      KAFKA_BROKER_ID: 2
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_CREATE_TOPICS: "stream-in:1:1,stream-out:1:1"
+    # 解决服务启动顺序问题，例如下面容器会先确定zoo1和redis两个服务，最后才启动kafka1服务
+    depends_on:
+      - zk
+    # 容器名称
+    container_name: kafka2
